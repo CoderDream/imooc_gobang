@@ -49,16 +49,16 @@ static NSInteger kBoardSize = 13;
     CGPoint point = [touch locationInView:self];
     
     NSUInteger h, v;
-    for (int i = 0; i <= kBoardSize; i++) {
+    for (NSUInteger i = 0; i <= kBoardSize; i++) {
         if (i * self.frame.size.width / (kBoardSize + 1) <= point.x && point.x < (i + 1) * self.frame.size.width / (kBoardSize + 1)) {
             if (i == 0) {
                 h = 0;
-                return;
+                break;
             }
             
             if (i == kBoardSize) {
                 h = kBoardSize - 1;
-                return;
+                break;
             }
             
             if (fabs(i * self.frame.size.width / (kBoardSize + 1) - point.x) >= fabs((i + 1) * self.frame.size.width / (kBoardSize + 1) - point.x)) {
@@ -69,16 +69,19 @@ static NSInteger kBoardSize = 13;
                 break;
             }
         }
-            
-        if (i * self.frame.size.width / (kBoardSize + 1) <= point.x && point.y < (i + 1) * self.frame.size.width / (kBoardSize + 1)) {
+        NSLog(@"got you h!");
+    }
+    
+    for (NSUInteger i = 0; i <= kBoardSize; i++) {
+        if (i * self.frame.size.width / (kBoardSize + 1) <= point.y && point.y < (i + 1) * self.frame.size.width / (kBoardSize + 1)) {
             if (i == 0) {
                 v = 0;
-                return;
+                break;
             }
             
             if (i == kBoardSize) {
                 v = kBoardSize - 1;
-                return;
+                break;
             }
             
             if (fabs(i * self.frame.size.width / (kBoardSize + 1) - point.y) >= fabs((i + 1) * self.frame.size.width / (kBoardSize + 1) - point.y)) {
@@ -89,6 +92,7 @@ static NSInteger kBoardSize = 13;
                 break;
             }
         }
+        NSLog(@"got you V!");
     }
     
     UIImageView *piece = [[UIImageView alloc] initWithFrame:(CGRectMake(0,0,7.5,7.5))];
